@@ -1,0 +1,64 @@
+import java.util.List;
+
+public class FermatThreader implements Runnable{
+	int untere;
+	int obere;
+	int thread_nummer;
+	List<Long> ergebnis;
+	public FermatThreader(int untere,int obere, int nummer,List<Long> ergebnis) {
+		this.untere = untere;
+		this.obere = obere;
+		this.thread_nummer = nummer;
+		this.ergebnis=ergebnis;
+	}
+	
+	
+	public void primeChecker(int untere, int obere, List<Long> ergebnis) {
+		for (int i = untere; i < obere; i++) {
+			if (isPrime(i, 3)) {
+				ergebnis.add((long) i);
+			}
+		}
+	}
+	
+	static long power(long a, long n, long p) {
+		long res=1;
+		
+		while (n>0) {
+			if ((n%2)==1) {
+				res = (res*a)%p;
+				n--;
+			}else {
+				a = (a*a)%p;
+				n= n/2;
+			}
+		}
+		return res;
+	}
+	
+	static boolean isPrime(long n, long k) {
+		if(n%2==0 && n!=2) {
+			return false;
+		}
+		if(n<=3) {
+			return true;
+		}
+		
+		while(k>0) {
+			int a = 2+ (int)(Math.random()%(n-3));
+			
+			if((Math.pow(a,n-1)%n)!=1) {
+				return false;
+			} 
+			k--;
+		}
+		return true;
+	}
+	public static void main(String[] args) {
+		System.out.println(isPrime(74441,3));
+	}
+	@Override
+	public void run() {
+		primeChecker(this.untere, this.obere, this.ergebnis);
+	}
+}

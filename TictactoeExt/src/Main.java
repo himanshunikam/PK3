@@ -1,0 +1,9 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		FirstWindow window = new FirstWindow();
+		//MainWindow main = new MainWindow("X", false);
+	}
+
+}

@@ -1,0 +1,65 @@
+import java.util.List;
+
+public class siebAtkin{
+
+	int untere;
+	int obere;
+	int thread_nummer;
+	List<Long> ergebnis;
+	public siebAtkin(int untere,int obere, int nummer,List<Long> ergebnis) {
+		this.untere = untere;
+		this.obere = obere;
+		this.thread_nummer = nummer;
+		this.ergebnis=ergebnis;
+	}
+	
+	
+	public static void primeChecker(int untere, int obere) {
+		boolean sieve[] =new boolean [obere-untere];
+		
+		for (int i = 0; i < obere-untere; i++) {
+			sieve[i] = false;
+		}
+		
+		for (int x = 1; x*x < obere; x++) {
+			for (int y = 0; y*y < obere; y++) {
+				int n = (4*x*x)+(y*y);
+				if(n<=obere && (n%12==1 || n%12==5) && n>=untere) {
+					sieve[n-untere] = sieve[n-untere]^true;
+				}
+				n = (3*x*x)+(y*y);
+				if (n<=obere && n%12==7 && n>=untere) {
+					sieve[n-untere] =sieve[n-untere]^true;
+				}
+				
+				n= (3*x*x)-(y*y);
+				if (x>y && n<=obere && n%12==11 && n>=untere) {
+					sieve[n-untere] =sieve[n-untere]^true;
+				}
+			}
+		}
+		
+		for (int i = untere; i*i < obere; i++) {
+			if (sieve[i-untere]) {
+				for (int j = i*i; j < obere; j+=i*i) {
+					sieve[j-untere] =false;
+				}
+			}
+		}
+		
+		for (int i = 0; i < sieve.length; i++) {
+			if (sieve[i]) {
+				//System.out.println(i+untere);
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		long start = System.currentTimeMillis();
+		primeChecker(0,1000000);
+		long end = System.currentTimeMillis();
+		
+		System.out.println("Dauer: "+ (end-start));
+	}
+
+}

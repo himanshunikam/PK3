@@ -1,0 +1,62 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Callable;
+
+
+public class Threader implements Runnable{
+	
+	int untere;
+	int obere;
+	int thread_nummer;
+	List<Long> ergebnis;
+	public Threader(int untere,int obere, int nummer,List<Long> ergebnis) {
+		this.untere = untere;
+		this.obere = obere;
+		this.thread_nummer = nummer;
+		this.ergebnis=ergebnis;
+	}
+	
+
+	
+	public static ArrayList<Long> siebDesEratosthenes(int untere, int obere) {
+		int n = obere- untere;
+		ArrayList<Long> ausgabe = new ArrayList<Long>();
+		boolean[] array = new boolean[n+1];
+		for (int i = 0; i <=n; i++) {
+			array[i] = true;
+		}
+		
+		
+		for (int i = 2; i <= Math.sqrt(obere); i++) {
+			if ((i==2) || (i%2 !=0)) {
+				for (int j = i * i; j <= obere; j += i) {
+					if (j < untere) {
+						continue;
+					} else {
+						array[j - untere] = false;
+					}
+				} 
+			}
+		}
+		
+		for (int i = 2; i < array.length; i++) {
+			if (array[i]) {
+				ausgabe.add((long)(i+untere));
+			}
+		}
+		
+		return ausgabe;
+		
+	}
+
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		this.ergebnis.addAll(siebDesEratosthenes(untere, obere));
+	}
+	
+	
+}

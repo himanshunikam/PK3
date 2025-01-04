@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Assert;
+import org.junit.Assert.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class test {
+	
+	
+	@Test
+	public void threaderTest() {
+		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		List<Long> test = Collections.synchronizedList(new ArrayList<Long>());
+		Threader t = new Threader(0,10,0, test);
+		executorService.submit(t);
+		Object[] primzahlen= {2L,3L,5L,7L};
+		executorService.shutdown();
+		try {
+			if (executorService.awaitTermination(1, TimeUnit.MINUTES)) {
+				System.out.println(Arrays.toString(test.toArray()));
+				Assert.assertArrayEquals(test.toArray(), primzahlen);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+	}
+	@Test
+	public void eratosthenesTest() {
+		List<Long> test = Collections.synchronizedList(new ArrayList<Long>());
+		Threader t = new Threader(0,10,0, test);
+		Object[] primzahlen= {2L,3L,5L,7L};
+		Assert.assertArrayEquals(t.siebDesEratosthenes(0, 10).toArray(), primzahlen);
+	}
+}

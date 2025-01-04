@@ -1,0 +1,43 @@
+import java.util.List;
+
+public abstract class Threader implements Runnable{
+	int untere;
+	int obere;
+	int thread_nummer;
+	List<Long> ergebnis;
+	
+	public Threader(int untere,int obere, int nummer,List<Long> ergebnis) {
+		this.untere = untere;
+		this.obere = obere;
+		this.thread_nummer = nummer;
+		this.ergebnis=ergebnis;
+	}
+	
+	public void primeChecker(int untere, int obere, List<Long> ergebnis) {
+		for (int i = untere; i < obere; i++) {
+			if (isPrime(i, 20)) {
+				ergebnis.add((long) i);
+			}
+		}
+	}
+	
+	static long power(long a, long n, long p) {
+		long res=1;
+		
+		while (n>0) {
+			if ((n%2)==1) {
+				res = (res*a)%p;
+				n--;
+			}else {
+				a = (a*a)%p;
+				n= n/2;
+			}
+		}
+		return res;
+	}
+	abstract boolean isPrime(long n, long k) ;
+	@Override
+	public void run() {
+		primeChecker(this.untere, this.obere, this.ergebnis);
+	}
+}

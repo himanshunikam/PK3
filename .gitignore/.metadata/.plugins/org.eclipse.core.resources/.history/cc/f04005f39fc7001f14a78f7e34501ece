@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class MillerRabinThreader implements Runnable{
+	int untere;
+	int obere;
+	int thread_nummer;
+	List<Long> ergebnis;
+	public MillerRabinThreader(int untere,int obere, int nummer,List<Long> ergebnis) {
+		this.untere = untere;
+		this.obere = obere;
+		this.thread_nummer = nummer;
+		this.ergebnis=ergebnis;
+	}
+	public static void primeChecker(int untere, int obere, List<Long> ergebnis) {
+		for (long i = untere; i < obere; i++) {
+			if (isPrime(i)) {
+				ergebnis.add(i);
+			}
+			
+		}
+	}
+	static long power(long b, long e, long m) {
+		long res=1;
+		b= b%m;
+		while (e>0) {
+			if ((e&1)==1) {
+				res =(res*b)%m;
+			}
+			e = e>>1;
+			b= (b*b)%m;
+		}
+		return res;
+	}
+	static boolean isStrongPseudoPrime(long d, long n) {
+		long a = 2+(int)(Math.random()%(n-4));
+		long x = power(a,d,n);
+		if (x==1| x==n-1) {
+			return true;
+		}
+		while (d!=n-1) {
+			x=(x*x)%n;
+			d=d*2;
+			
+			if (x==1) {
+				return false;
+			}
+			if(x==n-1) {
+				return true;
+			}
+		}
+		return false;
+	}
+	static boolean isPrime(long n) {
+		if (n<=1 || n==4) {
+			return false;
+		}
+		if (n<=3) {
+			return true;
+		}
+		long d= n-1;
+		while (d%2==0) {
+			d = d/2;
+		}
+		for (int i = 0; i < 3; i++) {
+			if(!isStrongPseudoPrime(d,n)) return false;
+		}
+		return true;
+	}
+	public static void main(String[] args) {
+//		List<Long> beispiel_ergebnis =new ArrayList<Long>();
+//		primeChecker(0,100, beispiel_ergebnis);
+	}
+	@Override
+	public void run() {
+		primeChecker(this.untere, this.obere, this.ergebnis);
+	}
+}
