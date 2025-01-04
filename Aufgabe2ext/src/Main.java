@@ -107,6 +107,18 @@ public class Main {
 					executorService.submit(threader);
 					}
 				break;
+			case 5:
+				if (i==thread_nummer-1) {
+					System.out.println("siebAtkin Thread "+i+" Calculating between: "+j*(obere/thread_nummer)+" and "+obere);
+					siebEratosthenes threader = new siebEratosthenes(j*(obere/thread_nummer), obere, i, ausgabe);
+					executorService.submit(threader);
+				}
+				else {
+					System.out.println("Thread "+i+" Calculating between: "+j*(obere/thread_nummer)+" and "+(j+1)*(obere/thread_nummer));
+					siebEratosthenes threader = new siebEratosthenes(j*(obere/thread_nummer), (j+1)*(obere/thread_nummer), i, ausgabe);
+					executorService.submit(threader);
+					}
+				break;
 				}
 			}
 		executorService.shutdown();

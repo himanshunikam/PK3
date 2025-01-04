@@ -2,21 +2,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class siebAtkin implements Runnable{
-
+public class siebAtkin extends siebThreader{
 	int untere;
 	int obere;
 	int thread_nummer;
 	List<Long> ergebnis;
-	public siebAtkin(int untere,int obere, int nummer,List<Long> ergebnis) {
-		this.untere = untere;
-		this.obere = obere;
-		this.thread_nummer = nummer;
-		this.ergebnis=ergebnis;
+	public siebAtkin(int untere, int obere, int nummer, List<Long> ergebnis) {
+		super(untere, obere, nummer, ergebnis);
+		// TODO Auto-generated constructor stub
 	}
+
 	
 	
-	public static ArrayList<Long> primeChecker(int untere, int obere) {
+	
+	
+	public ArrayList<Long> primeChecker(int untere, int obere) {
 		int m = obere- untere;
 		ArrayList<Long> ausgabe = new ArrayList<Long>();
 		boolean[] sieve = new boolean[m+1];
@@ -61,16 +61,4 @@ public class siebAtkin implements Runnable{
 		
 		return ausgabe;
 	}
-	public static void main(String[] args) {
-		ArrayList<Long> ausgabe = primeChecker(0,1000);
-		
-		System.out.println(Arrays.toString(ausgabe.toArray()));
-	}
-
-	@Override
-	public void run() {
-		this.ergebnis.addAll(primeChecker(untere, obere));
-		
-	}
-
 }
