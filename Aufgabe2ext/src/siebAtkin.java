@@ -21,6 +21,11 @@ public class siebAtkin extends siebThreader{
 		ArrayList<Long> ausgabe = new ArrayList<Long>();
 		boolean[] sieve = new boolean[m+1];
 		
+		if (untere<5) {
+			ausgabe.add(2L);
+			ausgabe.add(3L);
+		}
+		
 		for (int i = 0; i < obere-untere; i++) {
 			sieve[i] = false;
 		}

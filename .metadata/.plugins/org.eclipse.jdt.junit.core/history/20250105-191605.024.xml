@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="test" project="Aufgabe2ext" tests="5" started="5" failures="2" errors="0" ignored="0">
+  <testsuite name="test" time="0.044" uniqueid="[engine:junit-jupiter]/[class:test]">
+    <testcase name="SolovayStrassenTest" classname="test" time="0.025" displayname="SolovayStrassenTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:SolovayStrassenTest()]"/>
+    <testcase name="siebEratosthenesTest" classname="test" time="0.009" displayname="siebEratosthenesTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:siebEratosthenesTest()]">
+      <failure>array lengths differed, expected.length=0 actual.length=4; arrays first differed at element [0]; expected:&lt;end of array&gt; but was:&lt;2&gt;&#13;
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:89)&#13;
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:28)&#13;
+	at org.junit.Assert.internalArrayEquals(Assert.java:534)&#13;
+	at org.junit.Assert.assertArrayEquals(Assert.java:285)&#13;
+	at org.junit.Assert.assertArrayEquals(Assert.java:300)&#13;
+	at test.siebEratosthenesTest(test.java:107)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)&#13;
+Caused by: java.lang.AssertionError: expected:&lt;end of array&gt; but was:&lt;2&gt;&#13;
+	at org.junit.Assert.fail(Assert.java:89)&#13;
+	at org.junit.Assert.failNotEquals(Assert.java:835)&#13;
+	at org.junit.Assert.assertEquals(Assert.java:120)&#13;
+	at org.junit.Assert.assertEquals(Assert.java:146)&#13;
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:87)&#13;
+	... 8 more&#13;
+&#13;
+</failure>
+    </testcase>
+    <testcase name="MillerRabinTest" classname="test" time="0.001" displayname="MillerRabinTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:MillerRabinTest()]"/>
+    <testcase name="threaderTest" classname="test" time="0.001" displayname="threaderTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:threaderTest()]"/>
+    <testcase name="siebAtkinTest" classname="test" time="0.004" displayname="siebAtkinTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:siebAtkinTest()]">
+      <failure>array lengths differed, expected.length=2 actual.length=4; arrays first differed at element [0]; expected:&lt;5&gt; but was:&lt;2&gt;&#13;
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:78)&#13;
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:28)&#13;
+	at org.junit.Assert.internalArrayEquals(Assert.java:534)&#13;
+	at org.junit.Assert.assertArrayEquals(Assert.java:285)&#13;
+	at org.junit.Assert.assertArrayEquals(Assert.java:300)&#13;
+	at test.siebAtkinTest(test.java:87)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)&#13;
+Caused by: java.lang.AssertionError: expected:&lt;5&gt; but was:&lt;2&gt;&#13;
+	at org.junit.Assert.fail(Assert.java:89)&#13;
+	at org.junit.Assert.failNotEquals(Assert.java:835)&#13;
+	at org.junit.Assert.assertEquals(Assert.java:120)&#13;
+	at org.junit.Assert.assertEquals(Assert.java:146)&#13;
+	at org.junit.internal.ExactComparisonCriteria.assertElementsEqual(ExactComparisonCriteria.java:8)&#13;
+	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:76)&#13;
+	... 8 more&#13;
+&#13;
+</failure>
+    </testcase>
+  </testsuite>
+</testrun>

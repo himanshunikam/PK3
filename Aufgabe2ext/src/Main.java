@@ -16,7 +16,7 @@ import java.util.Enumeration;
 
 public class Main {
 	
-	public static void printArray(Object[] ausgabe) {
+	private static void printArray(Object[] ausgabe) {
 		Arrays.sort(ausgabe);
 		if (ausgabe.length> 200) {
 			System.out.println("Erste 100 Zahlen : ");
@@ -34,26 +34,8 @@ public class Main {
 		}
 	}
 	
-	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		
-		int thread_nummer;
-		int obere;
-		int threader_wahl;
-		
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Obere grenze Eingeben: ");
-		obere= scanner.nextInt();
-		System.out.println("Anzahl der Threads Eingeben: ");
-		thread_nummer = scanner.nextInt();
-		System.out.println("Threader waehlen: ");
-		threader_wahl = scanner.nextInt();
-		scanner.close();
-//		System.out.println("started...");
-		if ((thread_nummer>obere)|| (thread_nummer>12)) {
-			throw new IllegalArgumentException("Falsche Eingabe");
-		}
+	private static void multiThreading(int obere, int thread_nummer, int threader_wahl) {
 		ExecutorService executorService = Executors.newFixedThreadPool(thread_nummer);
-
 		List<Long> ausgabe = Collections.synchronizedList(new ArrayList<>());
 		long start = System.currentTimeMillis();
 		for (int i = 0, j=0; i < thread_nummer; i++, j++) {
@@ -109,7 +91,7 @@ public class Main {
 				break;
 			case 5:
 				if (i==thread_nummer-1) {
-					System.out.println("siebAtkin Thread "+i+" Calculating between: "+j*(obere/thread_nummer)+" and "+obere);
+					System.out.println("siebEratosthenes Thread "+i+" Calculating between: "+j*(obere/thread_nummer)+" and "+obere);
 					siebEratosthenes threader = new siebEratosthenes(j*(obere/thread_nummer), obere, i, ausgabe);
 					executorService.submit(threader);
 				}
@@ -136,6 +118,72 @@ public class Main {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public static int takeObereInput() {
+		int obere=1;
+		try {
+			Scanner scanner = new Scanner(System.in);
+			System.out.print("Obere grenze eingeben: ");
+			obere = scanner.nextInt();
+			if (obere > 1000000000) {
+				throw new IllegalArgumentException("Falsche Eingabe");
+			}
+			return obere;
+		} catch (Exception e) {
+			System.out.println("Falsche Eingabe, wider versuchen: ");
+			takeObereInput();
+		}
+		return obere;
+	}
+	
+	public static int takeThreadNummerInput(int obere) {
+		int thread_nummer=1;
+		try {
+			Scanner scanner = new Scanner(System.in);
+			System.out.print("Anzahl der Threads eingeben: ");
+			thread_nummer = scanner.nextInt();
+			if (thread_nummer> 12 || thread_nummer>obere) {
+				throw new IllegalArgumentException("Falsche Eingabe");
+			}
+			return thread_nummer;
+		} catch (Exception e) {
+			System.out.println("Falsche Eingabe, wider versuchen: ");
+			takeThreadNummerInput(obere);
+		}
+		return thread_nummer;
+	}
+	
+	public static int takeThreaderWahlInput() {
+		int threader_wahl=1;
+		try {
+			Scanner scanner = new Scanner(System.in);
+			System.out.print("Threader waehlen: ");
+			threader_wahl = scanner.nextInt();
+			if (threader_wahl > 5) {
+				throw new IllegalArgumentException("Falsche Eingabe");
+			}
+			return threader_wahl;
+		} catch (Exception e) {
+			System.out.println("Falsche Eingabe, wider versuchen: ");
+			takeThreaderWahlInput();
+		}
+		return threader_wahl;
+	}
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		
+		int thread_nummer;
+		int obere;
+		int threader_wahl;
+		
+		obere = takeObereInput();
+		thread_nummer = takeThreadNummerInput(obere);
+		threader_wahl=takeThreaderWahlInput();	
+		
+		multiThreading(obere, thread_nummer, threader_wahl);
+		
+		
 	
 	}
 
