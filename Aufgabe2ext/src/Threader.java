@@ -1,10 +1,10 @@
 import java.util.List;
 
 public abstract class Threader implements Runnable{
-	int untere;
-	int obere;
-	int thread_nummer;
-	List<Long> ergebnis;
+	int untere; // Untere Grenze
+	int obere; //Obere grenze
+	int thread_nummer; //Nummer des Threads
+	List<Long> ergebnis; //Liste zur Speicherung der Ergebnisse
 	
 	public Threader(int untere,int obere, int nummer,List<Long> ergebnis) {
 		this.untere = untere;
@@ -12,7 +12,7 @@ public abstract class Threader implements Runnable{
 		this.thread_nummer = nummer;
 		this.ergebnis=ergebnis;
 	}
-	
+	// Methode zur Überprüfung aller Zahlen im Bereich auf Primzahleigenschaften
 	public void primeChecker(int untere, int obere, List<Long> ergebnis) {
 		for (int i = untere; i < obere; i++) {
 			if (isPrime(i, 20)) {
@@ -20,7 +20,7 @@ public abstract class Threader implements Runnable{
 			}
 		}
 	}
-	
+	// Berechnet (a^n) % p 
 	static long power(long a, long n, long p) {
 		long res=1;
 		
@@ -35,7 +35,9 @@ public abstract class Threader implements Runnable{
 		}
 		return res;
 	}
+	// Abstrakte Methode zur Primzahlprüfung
 	abstract boolean isPrime(long n, long k) ;
+	// Führt die Primzahlprüfung im Bereich [untere, obere) aus
 	@Override
 	public void run() {
 		primeChecker(this.untere, this.obere, this.ergebnis);

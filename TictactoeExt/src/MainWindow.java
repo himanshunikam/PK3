@@ -6,6 +6,9 @@ import java.awt.*;
 import javax.swing.*;
 
 public class MainWindow extends JFrame implements ActionListener {
+	//Initialisierung von die elemente in die zweite Fenster
+	
+	//Default values
 	boolean win = false;
 	Random random = new Random();
 	boolean playerTurn = true;
@@ -39,7 +42,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		titel.setOpaque(true);
 		
 		buttonPanel.setLayout(new GridLayout(3,3));
-		
+		//Erstellung von knoepfe 
 		for(int i =0; i< 9; i++) {
 			buttons[i] = new JButton("");
 			buttonPanel.add(buttons[i]);
@@ -60,33 +63,28 @@ public class MainWindow extends JFrame implements ActionListener {
 	
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("Available buttons size 0 iteration : "+ this.available_buttons.size()+ '\n'+this.available_buttons.toString());;
+	public void actionPerformed(ActionEvent e) { //Haupt eingabe methode
 		for(int i =0; i<9; i++) {
-			if(e.getSource()==buttons[i] && buttons[i].getText()=="") {
-				if(this.playerTurn) {
+			if(e.getSource()==buttons[i] && buttons[i].getText()=="") { //wenn das knopf leer ist
+				if(this.playerTurn) { //wenn der erster Spieler spielt
 					playerSpielt(i);
 				}
-				else if(!this.computer_gegner) {
+				else if(!this.computer_gegner) {  // wenn computer_gegner false ist, also wenn Gegner auch ein Person ist.
 					gegnerSpielt(i);
 				}
 			}
 		}
-		if(this.computer_gegner && !this.playerTurn && this.available_buttons.size()>0 && !this.win) {
+		if(this.computer_gegner && !this.playerTurn && this.available_buttons.size()>0 && !this.win) { //wenn compueter_gegner wahr ist
 			computerSpielt();
 		}
 		
 	}
 	
 	public void playerSpielt(int i) {
-		buttons[i].setText(element);
+		buttons[i].setText(element); //button wird zu den entsprechenden Spieler element gesetzt.
 		playerTurn = false;
 		titel.setText(gegnerElement +" Turn");
-		//int choosenButton = this.available_buttons.get(i);
-		System.out.println("i: "+ i);
-		System.out.println("Removed element at position: "+getPosition(i));
-		this.available_buttons.remove(getPosition(i));
-		System.out.println("Available Buttons size after playerTurn: "+this.available_buttons.size()+ '\n'+this.available_buttons.toString());
+		this.available_buttons.remove(getPosition(i)); //available_buttons wird aktualisiert
 		check(i, element);
 	}
 	
@@ -98,7 +96,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		check(i,gegnerElement);
 	}
 	
-	public void computerSpielt() {
+	public void computerSpielt() {  //dieselbe logik von CompueterSpieler.java in Aufgabe1
 		int randomButton = getRandomButton();
 		buttons[randomButton].setText(gegnerElement);
 		titel.setText(element+ "Turn");
@@ -114,7 +112,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		System.out.println("Available Buttons size: "+this.available_buttons.size()+ '\n'+this.available_buttons.toString());
 		return randomButton; 
 	}
-	private int getPosition(int k) {
+	private int getPosition(int k) { //gibt position zurueck in available_buttons
 		for(int i =0; i<this.available_buttons.size(); i++) {
 			if(this.available_buttons.get(i)==k) {
 				return i;
@@ -122,10 +120,10 @@ public class MainWindow extends JFrame implements ActionListener {
 		}
 		return -1;
 	}
-	public String getElement(int i) {
+	public String getElement(int i) { //gibt element in den entsprechende Button zurueck.
 		return buttons[i].getText();
 	}
-	private String getGegnerElement() {
+	private String getGegnerElement() { //gibt das gegner_element zurueck
 		if(element == "X") {
 			gegnerElement ="O";
 		}
@@ -134,10 +132,10 @@ public class MainWindow extends JFrame implements ActionListener {
 		}
 		return gegnerElement;
 	}
-	public int linearIdx(int x, int y) {
+	public int linearIdx(int x, int y) { //linear index fuer check_win
 		return (x*3)+y;
 	}
-	public void check(int n, String element) {
+	public void check(int n, String element) {  //dieselbe check_win logik von Spielbrett.java in Aufgabe 1
 		int row=0;
 		int col =0;
 		int diag =0;
@@ -167,13 +165,6 @@ public class MainWindow extends JFrame implements ActionListener {
 			wins();
 			System.out.println("Win Condition reached!!!!");
 			titel.setText(element+" Wins!");
-			/*try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			this.dispose();*/
 			
 		}else {
 			if(this.available_buttons.size()==0) {
@@ -184,7 +175,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		
 	}
 	
-	public void wins() {
+	public void wins() {  // Setzt Gewinnzustand ein
 		this.win = true;
 		for(int i =0; i<9; i++) {
 			buttons[i].setEnabled(false);

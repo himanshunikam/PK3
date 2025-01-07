@@ -1,21 +1,21 @@
+// Algorithmus Quelle : https://www.geeksforgeeks.org/sieve-of-atkin/?ref=header_outind
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+//Klasse siebAtkin, die von der Klasse siebThreader erbt
+//Implementiert das Sieb von Atkin zur effizienten Berechnung von Primzahlen
 public class siebAtkin extends siebThreader{
-	int untere;
-	int obere;
-	int thread_nummer;
-	List<Long> ergebnis;
+	int untere; //Untere Grenze
+	int obere;  //Obere Grenze
+	int thread_nummer; // Nummer des Threads
+	List<Long> ergebnis;//Liste zur speicherung von ergebnisse
 	public siebAtkin(int untere, int obere, int nummer, List<Long> ergebnis) {
 		super(untere, obere, nummer, ergebnis);
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	
-	
+	// Methode zur Berechnung der Primzahlen im angegebenen Bereich mithilfe des Siebs von Atkin
 	public ArrayList<Long> primeChecker(int untere, int obere) {
 		int m = obere- untere;
 		ArrayList<Long> ausgabe = new ArrayList<Long>();
@@ -29,7 +29,7 @@ public class siebAtkin extends siebThreader{
 		for (int i = 0; i < obere-untere; i++) {
 			sieve[i] = false;
 		}
-		
+		// Anwendung der mathematischen Bedingungen des Siebs von Atkin
 		for (int x = 1; x*x < obere; x++) {
 			for (int y = 0; y*y < obere; y++) {
 				int n = (4*x*x)+(y*y);
@@ -47,7 +47,7 @@ public class siebAtkin extends siebThreader{
 				}
 			}
 		}
-		
+		// Eliminierung von Zahlen, die Vielfache von Quadraten sind
 		for (int i = 5; i*i < obere; i++) {
 			if ((i-untere)>=0) {
 				if (sieve[i - untere]) {
@@ -57,7 +57,7 @@ public class siebAtkin extends siebThreader{
 				} 
 			}
 		}
-		
+		// Hinzufügen aller als "prim" markierten Zahlen zur Ausgabeliste
 		for (int i = 0; i < sieve.length; i++) {
 			if (sieve[i]) {
 				ausgabe.add((long) i+untere);

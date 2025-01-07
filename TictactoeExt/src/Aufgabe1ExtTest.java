@@ -129,6 +129,7 @@ public class Aufgabe1ExtTest {
 	
 	@AfterEach
 	public void tearDown() {
-		FirstWindow windwo = new FirstWindow();
+		FirstWindow window = new FirstWindow();
 	}
+
 }

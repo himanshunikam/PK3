@@ -1,3 +1,5 @@
+// Quelle : https://www.geeksforgeeks.org/solovay-strassen-method-of-primality-test/?ref=header_outind
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -8,18 +10,21 @@ public class SolovayStrassenThreader extends Threader{
 		super(untere, obere, nummer, ergebnis);
 		// TODO Auto-generated constructor stub
 	}
+	// Berechnet (base^exponent) % mod effizient
 	static long modulo(long base, long exponent, long mod) {
 		long x=1;
 		long y= base;
 		while (exponent>0) {
 			if(exponent%2==1) {
-				x=(x*y)%mod;
+				x=(x*y)%mod;// Wenn das aktuelle Bit von exponent 1 ist
 			}
-			y= (y*y)%mod;
-			exponent= exponent/2;
+			y= (y*y)%mod; // Basis quadrieren
+			exponent= exponent/2;// Exponent halbieren
 		}
-		return x%mod;
+		return x%mod; // Rückgabe des modularen Ergebnisses
 	}
+	// Methode zur Berechnung des Jacobi-Symbols
+	// Berechnet das Jacobi-Symbol (a/n)
 	static long jacobian(long a, long n) {
 		if(n<=0||(n%2==0&&n!=2)) {
 			return 0;
@@ -34,6 +39,7 @@ public class SolovayStrassenThreader extends Threader{
 		if (a==1) {
 			return ans;
 		}
+		// Iterative Berechnung des Jacobi-Symbols
 		while (a!=0) {
 			if (a<0) {
 				a=-a;
@@ -47,6 +53,7 @@ public class SolovayStrassenThreader extends Threader{
 					ans=-ans;
 				}
 			}
+			// Anwendung der wechselseitigen Regel
 			long temp=a;
 			a=n;
 			n=temp;
@@ -58,10 +65,11 @@ public class SolovayStrassenThreader extends Threader{
 				a=a-n;
 			}
 		}
+		// Wenn n = 1, ist das Ergebnis das Jacobi-Symbol
 		if(n==1) {
 			return ans;
 		}
-		return 0;
+		return 0;// Andernfalls ist das Jacobi-Symbol undefiniert
 	}
 	@Override
 	boolean isPrime(long n, long k) {
@@ -72,11 +80,15 @@ public class SolovayStrassenThreader extends Threader{
 			return false;
 		}
 		Random random = new Random();
+		// Durchführung des Solovay-Strassen-Tests k-mal
 		for (int i = 0; i < k; i++) {
+			// Zufällige Wahl von a im Bereich [1, n-1]
 			long r= Math.abs(random.nextLong());
 			long a= r%(n-1)+1;
+			// Berechnung des Jacobi-Symbols und des modularen Exponentiationswerts
 			long jacobian = (n+jacobian(a,n))%n;
 			long mod=modulo(a,(n-1)/2,n);
+			// Überprüfung der Bedingung: mod = Jacobi (mod n)
 			if (jacobian==0||mod!=jacobian) {
 				return false;
 			}

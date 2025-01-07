@@ -3,8 +3,9 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import javax.swing.*;
 
+//Initialiserung von elemente in Erste Fenster
 public class FirstWindow extends JFrame implements ActionListener {
-	
+	// default values
 	String element = "X";
 	boolean computer_gegner = false;
 	

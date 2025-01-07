@@ -22,7 +22,14 @@ public class Aufgabe1Test {
 		spielbrett = new Spielbrett();
 	}
 	
-	
+	private boolean inAvailableIndex(int i, Spielbrett spielbrett) {
+		for (int j = 0; j < spielbrett.available_index.size(); j++) {
+			if (spielbrett.available_index.get(j)==i) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	@Test
 	public void validElementTest() {
@@ -82,7 +89,35 @@ public class Aufgabe1Test {
 		spielbrett.placeElement('X', 4, 0);
 		Assert.assertTrue(spielbrett.win);
 	}
+	@Test
+	public void validInputTest() {
+		Spielbrett spielbrett2 = new Spielbrett();
+		spielbrett2.placeElement('X', 0, 0);
+		spielbrett2.placeElement('O', 0, 0);
+		Assert.assertEquals(spielbrett2.spielbrett[0][0], 'X');
+	}
+	@Test
+	public void computerSpielerTest() {
+		Spieler computer = new ComputerSpieler('X');
+		Spieler gegner = new Person('O');
+		Spielbrett spielbrettComputer = new Spielbrett();
+		int initial_freie_plaetze = spielbrettComputer.available_index.size();
+		computer.moveElement(spielbrettComputer, gegner);
+		int final_freie_plaetze = spielbrettComputer.available_index.size();
+		
+		Assert.assertTrue(gegner.chance);
+		Assert.assertFalse(computer.chance);
+		Assert.assertEquals(1,initial_freie_plaetze- final_freie_plaetze);
+	}
 	
+	@Test
+	public void availableIndexTest() {
+		spielbrett.placeElement('X', 0, 0);
+		Assert.assertFalse(this.inAvailableIndex(0, spielbrett));
+		for (int i = 1; i < 9; i++) {
+			Assert.assertTrue(this.inAvailableIndex(i, spielbrett));
+		}
+	}
 	@AfterEach
 	public void clearBrett() {
 		spielbrett = new Spielbrett();

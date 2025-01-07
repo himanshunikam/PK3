@@ -1,0 +1,31 @@
+import java.util.List;
+
+public class FermatThreader extends Threader{
+	public FermatThreader(int untere, int obere, int nummer, List<Long> ergebnis) {
+		super(untere, obere, nummer, ergebnis);
+		// TODO Auto-generated constructor stub
+	}
+	
+	boolean isPrime(long n, long k) {
+		if((n%2==0 && n!=2)||n==1) {
+			return false;
+		}
+		if(n<=3) {
+			return true;
+		}
+		
+		while(k>0) {
+			int a = 2+ (int)(Math.random()%(n));
+			
+			if(power(a,n-1,n)!=1) {
+				return false;
+			} 
+			k--;
+		}
+		return true;
+	}
+//	@Override
+//	public void run() {
+//		primeChecker(this.untere, this.obere, this.ergebnis);
+//	}
+}

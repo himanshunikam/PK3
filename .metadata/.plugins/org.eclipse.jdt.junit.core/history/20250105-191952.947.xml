@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="test" project="Aufgabe2ext" tests="5" started="5" failures="0" errors="0" ignored="0">
-  <testsuite name="test" time="0.032" uniqueid="[engine:junit-jupiter]/[class:test]">
-    <testcase name="SolovayStrassenTest" classname="test" time="0.023" displayname="SolovayStrassenTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:SolovayStrassenTest()]"/>
-    <testcase name="siebEratosthenesTest" classname="test" time="0.001" displayname="siebEratosthenesTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:siebEratosthenesTest()]"/>
-    <testcase name="MillerRabinTest" classname="test" time="0.001" displayname="MillerRabinTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:MillerRabinTest()]"/>
-    <testcase name="threaderTest" classname="test" time="0.002" displayname="threaderTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:threaderTest()]"/>
-    <testcase name="siebAtkinTest" classname="test" time="0.001" displayname="siebAtkinTest()" uniqueid="[engine:junit-jupiter]/[class:test]/[method:siebAtkinTest()]"/>
-  </testsuite>
-</testrun>

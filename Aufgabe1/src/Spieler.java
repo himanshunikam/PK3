@@ -1,12 +1,13 @@
 import java.util.Scanner;
 
+//Parent Klasse fuer Spieler
 public class Spieler {
 	public boolean chance = true;
     public char element;
     public boolean isComputer;
     Scanner scanner = new Scanner(System.in);
     
-    public Spieler(char element){
+    public Spieler(char element){ //Prueft ob das element gueltig ist.
     	this.element = element;
     	try {
 			if (isValidElement(this.element)) {
@@ -38,9 +39,6 @@ public class Spieler {
         }
         return false;
     }
-	public void moveElement(Spielbrett spielbrett, Spieler gegner) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void moveElement(Spielbrett spielbrett, Spieler gegner) {};
     
 }

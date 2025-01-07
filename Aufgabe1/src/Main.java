@@ -6,7 +6,7 @@ public class Main {
 		Spieler spieler_1 = new Person('X');
 		Spieler spieler_2 = new Person('O');
 		
-		//Spieler spieler_3 = new ComputerSpieler('z');
+		Spieler spieler_3 = new ComputerSpieler('O');
 		
 		Spielbrett spielbrett = new Spielbrett();
 		
