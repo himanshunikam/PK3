@@ -6,7 +6,7 @@
 - IDE : **Eclipse Version: 2024-09 (4.33.0)**
 - Build Tool : **Eclipse Internal Build System**
 - Betriebssystem : **Windows 11**
-
+- Test Umgebung : **JUnit 5**
 ---
 ### Quelle
 **Quelle zu den in den Code verwendeten Algorithmen:**
@@ -27,3 +27,4 @@
 - 3-> Solovay-Strassen
 - 4-> Sieb von Atkin
 - 5-> Sieb vpn Eratosthenes
+
